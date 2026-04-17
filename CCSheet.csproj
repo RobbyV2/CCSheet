@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\tModLoader.targets" />
+  <PropertyGroup>
+    <AssemblyName>CCSheet</AssemblyName>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+</Project>

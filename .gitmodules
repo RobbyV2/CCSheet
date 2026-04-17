@@ -1,0 +1,15 @@
+[submodule "references/QTRHacker"]
+	path = references/QTRHacker
+	url = https://github.com/Qiu233/QTRHacker.git
+[submodule "references/CheatSheet"]
+	path = references/CheatSheet
+	url = https://github.com/JavidPack/CheatSheet.git
+[submodule "references/tModLoader"]
+	path = references/tModLoader
+	url = https://github.com/tModLoader/tModLoader.git
+[submodule "references/TShock"]
+	path = references/TShock
+	url = https://github.com/Pryaxis/TShock.git
+[submodule "references/OTAPI"]
+	path = references/OTAPI
+	url = https://github.com/SignatureBeef/Open-Terraria-API.git

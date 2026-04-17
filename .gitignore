@@ -1,0 +1,29 @@
+# Build output
+bin/
+obj/
+*.tmod
+
+# IDE
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+_ReSharper*/
+*.DotSettings.user
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Orchestration / private
+.claude/
+CLAUDE.md
+MEMORY.md
+memory/
+.remember/
+temp/
+_exmod_tmp/
