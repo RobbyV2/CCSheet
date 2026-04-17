@@ -805,7 +805,7 @@ namespace CCSheet.Menus
 			bToggleQuickTeleport.Visible = ConfigurationLoader.personalConfiguration.Waypoints && CCSheet.instance.herosPermissions[CCSheet.QuickTeleport_Permission];
 			LightHack.button.Visible = ConfigurationLoader.personalConfiguration.LightHack && !heros;
 			GodMode.button.Visible = ConfigurationLoader.personalConfiguration.GodMode && !heros;
-			SpawnRateMultiplier.button.Visible = ConfigurationLoader.personalConfiguration.SpawnRate && SpawnRateMultiplier.HasPermission;
+			SpawnRateMultiplier.button.Visible = ConfigurationLoader.personalConfiguration.SpawnRate && SpawnRateMultiplier.HasPermission && Main.netMode != NetmodeID.MultiplayerClient;
 			//BossDowner.button.Visible = ConfigurationLoader.configuration.BossDowner;
 			//bToggleEventManager.Visible = ConfigurationLoader.configuration.EventManager;
 			//Main.NewText("bToggleItemBrowser " + bToggleItemBrowser.Visible);

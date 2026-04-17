@@ -99,7 +99,13 @@ namespace CCSheet.Menus
 			this.Resize();
 		}
 
+		private static bool warnedUnloadedSection;
+
 		public static void HandleTeleport(int teleportType = 0, bool forceHandle = false, int whoAmI = 0) {
+			if (!warnedUnloadedSection && Main.netMode == NetmodeID.MultiplayerClient) {
+				warnedUnloadedSection = true;
+				Main.NewText(CSText("UnloadedSectionWarning"), Color.Orange);
+			}
 			TeleportPlayer(teleportType, syncData: true, whoAmI: Main.myPlayer);
 		}
 
@@ -143,6 +149,10 @@ namespace CCSheet.Menus
 		}
 
 		private static void HandleDungeonTeleport(Player player, bool syncData = false) {
+			if (Main.netMode == NetmodeID.MultiplayerClient && (Main.dungeonX <= 0 || Main.dungeonY <= 0)) {
+				Main.NewText(CSText("DungeonNotSynced"), Color.Orange);
+				return;
+			}
 			RunTeleport(player, new Vector2(Main.dungeonX, Main.dungeonY), syncData, true);
 		}
 
@@ -212,8 +222,11 @@ namespace CCSheet.Menus
 				}
 			}
 
-			if (!teleportDestinationFound)
+			if (!teleportDestinationFound) {
+				if (Main.netMode == NetmodeID.MultiplayerClient)
+					Main.NewText(CSText("HellNotLoaded"), Color.Orange);
 				return;
+			}
 
 			RunTeleport(player, teleportPosition, syncData, false);
 		}
@@ -237,8 +250,11 @@ namespace CCSheet.Menus
 			if (pos != prePos) {
 				RunTeleport(player, new Vector2(pos.X, pos.Y), syncData, false);
 			}
-			else
-				return; //not found
+			else {
+				if (Main.netMode == NetmodeID.MultiplayerClient)
+					Main.NewText(CSText("TempleNotLoaded"), Color.Orange);
+				return;
+			}
 		}
 
 		private static void HandleRandomTeleport(Player player, bool syncData = false) {

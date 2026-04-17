@@ -29,6 +29,10 @@ Mods: {
 			Hell: Hell
 			Temple: Temple
 			Random: Random
+			UnloadedSectionWarning: Teleports in multiplayer may flash you through unloaded terrain. Vanilla netcode streams tiles after the teleport; this is a client-side limitation.
+			DungeonNotSynced: Dungeon coordinates are not synced to multiplayer clients. The server does not broadcast them; this teleport is unavailable.
+			HellNotLoaded: Hell teleport requires underworld tiles to be loaded. Explore that area first so the server streams them to you.
+			TempleNotLoaded: Temple teleport requires temple tiles to be loaded. Explore the Jungle first so the server streams them to you.
 		}
 
 		QuickClear: {
