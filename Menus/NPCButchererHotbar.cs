@@ -89,23 +89,11 @@ namespace CCSheet.Menus
 		}
 
 		public static void HandleButcher(int butcherType = 0, bool forceHandle = false) {
-			bool syncData = forceHandle || Main.netMode == NetmodeID.SinglePlayer;
-			if (syncData) {
-				ButcherNPCs(butcherType, forceHandle);
-			}
-			else {
-				SyncButcher(butcherType);
-			}
+			ButcherNPCs(butcherType, syncData: true);
 		}
 
 		private static void SyncButcher(int butcherType = 0) {
-			// TODO(clientcheats): rewire to NetMessage.SendData for vanilla-server compat
-			// Non-functional in all multiplayer modes while stubbed.
 			return;
-			var netMessage = CCSheet.instance.GetPacket();
-			netMessage.Write((byte)CCSheetMessageType.ButcherNPCs);
-			netMessage.Write(butcherType);
-			netMessage.Send();
 		}
 
 		private static void ButcherNPCs(int butcherType = 0, bool syncData = false, int indexRange = -1) {

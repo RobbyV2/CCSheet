@@ -571,12 +571,7 @@ namespace CCSheet.Menus
 		}
 
 		private static void SyncVacuum() {
-			// TODO(clientcheats): rewire to NetMessage.SendData for vanilla-server compat
-			// Non-functional in all multiplayer modes while stubbed.
-			return;
-			var netMessage = CCSheet.instance.GetPacket();
-			netMessage.Write((byte)CCSheetMessageType.VacuumItems);
-			netMessage.Send();
+			VacuumItems(syncData: true, whoAmI: Main.myPlayer);
 		}
 
 		private static void VacuumItems(bool syncData = false, int whoAmI = 0) {

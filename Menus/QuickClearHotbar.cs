@@ -106,13 +106,7 @@ namespace CCSheet.Menus
 		}
 
 		private static void SyncQuickClear(int clearType = 0) {
-			// TODO(clientcheats): rewire to NetMessage.SendData for vanilla-server compat
-			// Non-functional in all multiplayer modes while stubbed.
-			return;
-			var netMessage = CCSheet.instance.GetPacket();
-			netMessage.Write((byte)CCSheetMessageType.QuickClear);
-			netMessage.Write(clearType);
-			netMessage.Send();
+			ClearObjects(clearType, syncData: true, whoAmI: Main.myPlayer);
 		}
 
 		private static void ClearObjects(int clearType = 0, bool syncData = false, int whoAmI = 0) {

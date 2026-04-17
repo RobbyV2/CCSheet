@@ -5,6 +5,7 @@ using ReLogic.Content;
 using System;
 using Terraria;
 using Terraria.GameContent;
+using Terraria.ID;
 using Terraria.Localization;
 
 namespace CCSheet.Menus
@@ -58,24 +59,10 @@ namespace CCSheet.Menus
 			//	ErrorLogger.Log("sD" + npcNum + " " + npc.type + " " + npc.boss);
 			base.onLeftClick += new EventHandler(this.Slot2_onLeftClick);
 			base.onRightClick += (s, e) => {
-				if (Main.netMode == 1) {
-					// TODO(clientcheats): rewire to NetMessage.SendData for vanilla-server compat
-					// Non-functional in all multiplayer modes while stubbed.
-					return;
-					// in MP, we request an npc be filtered.
-					var message = CCSheet.instance.GetPacket();
-					message.Write((byte)CCSheetMessageType.RequestFilterNPC);
-					message.Write(netID);
-					message.Write(!isFiltered);
-					message.Send();
-				}
-				else {
-					// in SP, we filter, mark browser as dirty, then save.
-					bool desired = !isFiltered;
-					NPCBrowser.FilterNPC(netID, desired);
-					NPCBrowser.needsUpdate = true;
-					ConfigurationLoader.SaveSetting();
-				}
+				bool desired = !isFiltered;
+				NPCBrowser.FilterNPC(netID, desired);
+				NPCBrowser.needsUpdate = true;
+				ConfigurationLoader.SaveSetting();
 			};
 			base.onHover += new EventHandler(this.Slot2_onHover);
 		}
@@ -210,15 +197,32 @@ namespace CCSheet.Menus
 			}
 		}
 
-		private static void SyncNPC(int type, int syncID = 0) {
-			// TODO(clientcheats): rewire to NetMessage.SendData for vanilla-server compat
-			// Non-functional in all multiplayer modes while stubbed.
-			return;
-			var netMessage = CCSheet.instance.GetPacket();
-			netMessage.Write((byte)CCSheetMessageType.SpawnNPC);
-			netMessage.Write(type);
-			netMessage.Write(syncID);
-			netMessage.Send();
+		// NPC spawning on a server that does not have CCSheet installed is
+		// constrained by MessageID.SpawnBossUseLicenseStartEvent (61), the only
+		// client-to-server spawn packet in vanilla Terraria's protocol. The
+		// server handler only accepts NPC types registered in
+		// NPCID.Sets.MPAllowedEnemies. The vanilla-default set covers most
+		// early-to-mid-game bosses but omits Skeletron (35), Wall of Flesh
+		// (113), Plantera (262), Moon Lord (398), Cultist (439), every vanilla
+		// non-boss, and any modded NPC whose mod does not opt in via
+		//     NPCID.Sets.MPAllowedEnemies[Type] = true;
+		// from SetStaticDefaults. The server's set depends on the mods it has
+		// loaded, which may differ from this client's set, so we always send
+		// the packet and emit a dynamic warning only when the client knows the
+		// type is not in its own set.
+		public static void SyncNPC(int type, int syncID = 0) {
+			if (Main.netMode != NetmodeID.MultiplayerClient) {
+				SpawnNPC(type, syncID: syncID);
+				return;
+			}
+			NetMessage.SendData(MessageID.SpawnBossUseLicenseStartEvent, -1, -1, null, Main.myPlayer, (float)type);
+			bool clientAllowsType = type >= 0
+				&& type < NPCID.Sets.MPAllowedEnemies.Length
+				&& NPCID.Sets.MPAllowedEnemies[type];
+			if (!clientAllowsType) {
+				string npcName = Lang.GetNPCName(type).ToString();
+				Main.NewText($"{npcName} is not in this client's NPCID.Sets.MPAllowedEnemies; the server will only spawn it if its own set includes this type (for example, via a mod loaded on the server).");
+			}
 		}
 
 		private static void SpawnNPC(int type, bool syncData = false, int syncID = 0, int whoAmI = 0) {

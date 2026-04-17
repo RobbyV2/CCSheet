@@ -100,23 +100,11 @@ namespace CCSheet.Menus
 		}
 
 		public static void HandleTeleport(int teleportType = 0, bool forceHandle = false, int whoAmI = 0) {
-			bool syncData = forceHandle || Main.netMode == 0;
-			if (syncData) {
-				TeleportPlayer(teleportType, forceHandle, whoAmI);
-			}
-			else {
-				SyncTeleport(teleportType);
-			}
+			TeleportPlayer(teleportType, syncData: true, whoAmI: Main.myPlayer);
 		}
 
 		private static void SyncTeleport(int teleportType = 0) {
-			// TODO(clientcheats): rewire to NetMessage.SendData for vanilla-server compat
-			// Non-functional in all multiplayer modes while stubbed.
 			return;
-			var netMessage = CCSheet.instance.GetPacket();
-			netMessage.Write((byte)CCSheetMessageType.TeleportPlayer);
-			netMessage.Write(teleportType);
-			netMessage.Send();
 		}
 
 		private static void TeleportPlayer(int teleportType = 0, bool syncData = false, int whoAmI = 0) {
@@ -256,10 +244,9 @@ namespace CCSheet.Menus
 		private static void HandleRandomTeleport(Player player, bool syncData = false) {
 			player.TeleportationPotion(); // RND
 			LeaveDust(player);
-			if (Main.netMode != 2)
+			if (Main.netMode != NetmodeID.MultiplayerClient)
 				return;
 			if (syncData) {
-				RemoteClient.CheckSection(player.whoAmI, player.position, 1);
 				NetMessage.SendData(65, -1, -1, null, 0, (float)player.whoAmI, player.position.X, player.position.Y, 3, 0, 0);
 			}
 			return;
@@ -399,11 +386,10 @@ namespace CCSheet.Menus
 
 			LeaveDust(player);
 
-			if (Main.netMode != 2)
+			if (Main.netMode != NetmodeID.MultiplayerClient)
 				return;
 
 			if (syncData) {
-				RemoteClient.CheckSection(player.whoAmI, player.position, 1);
 				NetMessage.SendData(65, -1, -1, null, 0, (float)player.whoAmI, pos.X, pos.Y, 3, 0, 0);
 			}
 		}

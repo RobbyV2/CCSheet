@@ -52,7 +52,7 @@ namespace CCSheet.Menus
 
 		private static Color buttonSelectedColor = new Color(209, 142, 13);
 
-		private UITextbox textbox;
+		internal UITextbox textbox;
 
 		private float spacing = 16f;
 

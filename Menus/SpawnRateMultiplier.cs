@@ -40,6 +40,10 @@ namespace CCSheet.Menus
 		}
 
 		public static void buttonLogic(bool leftMouse) {
+			if (Main.netMode == NetmodeID.MultiplayerClient) {
+				Main.NewText("Spawn rate control requires a server running tModLoader with CCSheet installed.");
+				return;
+			}
 			int newIndex = leftMouse ? (currentMultiplierIndex + 1) % multiplierStrings.Length : (multiplierStrings.Length + currentMultiplierIndex - 1) % multiplierStrings.Length;
 
 			if (Main.netMode == 1) {
