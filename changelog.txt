@@ -1,3 +1,11 @@
-This is an example of a custom changelog.
-Example Mod v{ModVersion} has been published to {tMLBuildPurpose} tML v{tMLVersion}.
-Learn more at the [url={ModHomepage}]homepage[/url]
+CCSheet v1.0.2
+- New Item Editor: floating window opened from the Actuation Rod button. Place an item in the slot to edit its properties (type, stack, prefix, damage, crit, knockback, use time, use animation, shoot, shoot speed, mana, scale, ammo, use ammo, auto reuse, rare) and click Apply to commit. Removing the item clears the fields.
+- Extra Accessory Slots now cap at 20 (was 6). Slots wrap into a second column to the left once the first column reaches the same height as the vanilla 3-column right-side UI.
+- In multiplayer, waypoint teleports surface a one-time warning about tile streaming. Dungeon, hell, and temple teleports now warn instead of silently failing when the target tiles are not synced to the client.
+- Spawn Rate Multiplier is hidden on multiplayer clients since it has no client-side effect.
+
+CCSheet v1.0.1
+- Initial release as a client-sided soft-fork of Cheat Sheet for tModLoader v2026.2.3 / Terraria 1.4.4.9.
+- Runs on vanilla tML servers (side = Client, vanilla netcode only).
+- Re-enables the stubbed Butcher and Quick Waypoint features using vanilla MessageIDs.
+- Fixes textbox input handling.

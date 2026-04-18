@@ -62,7 +62,7 @@ namespace CCSheet.Menus
 			this.mod = mod;
 			this.CanMove = true;
 			base.Width = 280;
-			base.Height = 358;
+			base.Height = 382;
 
 			Asset<Texture2D> texture = mod.Assets.Request<Texture2D>("UI/closeButton", ReLogic.Content.AssetRequestMode.ImmediateLoad);
 			UIImage uIImage = new UIImage(texture);
@@ -74,7 +74,7 @@ namespace CCSheet.Menus
 			//ConfigurationLoader.Initialized();
 
 			string[] labels = new string[] { CSText("ItemBrowser"), CSText("NPCBrowser"), CSText("RecipeBrowser"), CSText("MinionBooster"), CSText("Butcher"), CSText("ClearMenu"),
-			CSText("ExtraAccessorySlots"), CSText("ModExtensions"), CSText("PaintTools"), CSText("SpawnRate"), CSText("Vacuum"), CSText("Waypoints"), CSText("LightHack"), CSText("GodMode")
+			CSText("ExtraAccessorySlots"), CSText("ModExtensions"), CSText("PaintTools"), CSText("SpawnRate"), CSText("Vacuum"), CSText("Waypoints"), CSText("LightHack"), CSText("GodMode"), CSText("ItemEditor")
 			/* "Boss Downer", "Event Manager"*/
 			};
 			Func<bool>[] selecteds = new Func<bool>[] {
@@ -92,6 +92,7 @@ namespace CCSheet.Menus
 				()=>ConfigurationLoader.personalConfiguration.Waypoints,
 				()=>ConfigurationLoader.personalConfiguration.LightHack,
 				()=>ConfigurationLoader.personalConfiguration.GodMode,
+				()=>ConfigurationLoader.personalConfiguration.ItemEditor,
               //  ConfigurationLoader.configuration.BossDowner,
               //  ConfigurationLoader.configuration.EventManager,
             };
@@ -111,6 +112,7 @@ namespace CCSheet.Menus
 				(bool a)=>ConfigurationLoader.personalConfiguration.Waypoints = a,
 				(bool a)=>ConfigurationLoader.personalConfiguration.LightHack = a,
 				(bool a)=>ConfigurationLoader.personalConfiguration.GodMode = a,
+				(bool a)=>ConfigurationLoader.personalConfiguration.ItemEditor = a,
 			};
 
 			for (int i = 0; i < labels.Length; i++) {

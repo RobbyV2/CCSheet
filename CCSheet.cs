@@ -40,6 +40,7 @@ namespace CCSheet
 		internal QuickTeleportHotbar quickTeleportHotbar;
 		internal QuickClearHotbar quickClearHotbar;
 		internal NPCButchererHotbar npcButchererHotbar;
+		internal ItemEditorHotbar itemEditorHotbar;
 		internal EventManagerHotbar eventManagerHotbar;
 
 		internal Dictionary<string, bool> herosPermissions = new Dictionary<string, bool>();
@@ -310,6 +311,10 @@ namespace CCSheet
 					npcButchererHotbar = new NPCButchererHotbar(this);
 					npcButchererHotbar.Visible = false;
 					npcButchererHotbar.Hide();
+
+					itemEditorHotbar = new ItemEditorHotbar(this);
+					itemEditorHotbar.SetDefaultPosition(new Vector2(80, 300));
+					itemEditorHotbar.Visible = false;
 
 					//eventManagerHotbar = new EventManagerHotbar(this);
 					//eventManagerHotbar.Visible = false;

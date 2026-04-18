@@ -63,6 +63,7 @@ namespace CCSheet.Menus
 		public UIImage bVacuum;
 		public UIImage bToggleNPCButcherer;
 		public UIImage bToggleQuickTeleport;
+		public UIImage bToggleItemEditor;
 		// public UIImage bSpawnRateMultiplier;
 		//public UIImage bToggleEventManager;
 
@@ -158,6 +159,7 @@ namespace CCSheet.Menus
 			bToggleNPCButcherer = new UIImage(ModUtils.GetItemTexture(ItemID.Skull));
 
 			bToggleQuickTeleport = new UIImage(ModUtils.GetItemTexture(ItemID.WoodenDoor));
+			bToggleItemEditor = new UIImage(ModUtils.GetItemTexture(ItemID.ActuationRod));
 
 			//bToggleEventManager = new UIImage(ModUtils.GetItemTexture(ItemID.PirateMap));
 
@@ -196,6 +198,7 @@ namespace CCSheet.Menus
 			bVacuum.Tooltip = CSText("VacuumItems");
 			bToggleNPCButcherer.Tooltip = CSText("ShowNPCButcherer");
 			bToggleQuickTeleport.Tooltip = CSText("ShowQuickWaypoints");
+			this.bToggleItemEditor.Tooltip = CSText("ShowItemEditor");
 			//		bToggleEventManager.Tooltip = "Show Event Manager";
 
 			//		this.bToggleBlockReach.Opacity = Hotbar.disabledOpacity;
@@ -241,6 +244,7 @@ namespace CCSheet.Menus
 				//QuickTeleportHotbar.TeleportPlayer(Main.LocalPlayer, new Vector2(Main.spawnTileX, Main.spawnTileY), true);
 				QuickTeleportHotbar.HandleTeleport();
 			};
+			this.bToggleItemEditor.onLeftClick += new EventHandler(this.bToggleItemEditor_onLeftClick);
 			//		this.bToggleEventManager.onLeftClick += new EventHandler(this.bToggleEventManager_onLeftClick);
 
 			//		this.buttonView.AddChild(this.bToggleBlockReach);
@@ -266,6 +270,7 @@ namespace CCSheet.Menus
 			buttonView.AddChild(bVacuum);
 			buttonView.AddChild(bToggleNPCButcherer);
 			buttonView.AddChild(bToggleQuickTeleport);
+			buttonView.AddChild(bToggleItemEditor);
 			//			buttonView.AddChild(bToggleEventManager);
 			buttonView.AddChild(SpawnRateMultiplier.GetButton(mod));
 			buttonView.AddChild(MinionSlotBooster.GetButton(mod));
@@ -427,6 +432,7 @@ namespace CCSheet.Menus
 			mod.quickTeleportHotbar.selected = false;
 			mod.quickClearHotbar.selected = false;
 			mod.npcButchererHotbar.selected = false;
+			mod.itemEditorHotbar.selected = false;
 			ConfigurationTool.configurationWindow.selected = false;
 			//BossDowner.bossDownerWindow.selected = false;
 			//mod.eventManagerHotbar.selected = false;
@@ -442,6 +448,7 @@ namespace CCSheet.Menus
 			bToggleItemBrowser.ForegroundColor = buttonUnselectedColor;
 			bTogglePaintTools.ForegroundColor = buttonUnselectedColor;
 			bToggleQuickTeleport.ForegroundColor = buttonUnselectedColor;
+			bToggleItemEditor.ForegroundColor = buttonUnselectedColor;
 			bToggleClearMenu.ForegroundColor = buttonUnselectedColor;
 			ConfigurationTool.button.ForegroundColor = buttonUnselectedColor;
 			//BossDowner.button.ForegroundColor = buttonUnselectedColor;
@@ -626,6 +633,19 @@ namespace CCSheet.Menus
 			}
 		}
 
+		private void bToggleItemEditor_onLeftClick(object sender, EventArgs e) {
+			UIImage uIImage = (UIImage)sender;
+			if (mod.itemEditorHotbar.selected) {
+				mod.itemEditorHotbar.selected = false;
+				uIImage.ForegroundColor = buttonUnselectedColor;
+			}
+			else {
+				DisableAllWindows();
+				mod.itemEditorHotbar.selected = true;
+				uIImage.ForegroundColor = buttonSelectedColor;
+			}
+		}
+
 		private void bToggleQuickTeleport_onLeftClick(object sender, EventArgs e) {
 			UIImage uIImage = (UIImage)sender;
 			if (mod.quickTeleportHotbar.selected) {
@@ -803,6 +823,7 @@ namespace CCSheet.Menus
 			bVacuum.Visible = ConfigurationLoader.personalConfiguration.Vacuum && CCSheet.instance.herosPermissions[CCSheet.Vacuum_Permission];
 			bToggleNPCButcherer.Visible = ConfigurationLoader.personalConfiguration.Butcher && CCSheet.instance.herosPermissions[CCSheet.NPCButcher_Permission];
 			bToggleQuickTeleport.Visible = ConfigurationLoader.personalConfiguration.Waypoints && CCSheet.instance.herosPermissions[CCSheet.QuickTeleport_Permission];
+			bToggleItemEditor.Visible = ConfigurationLoader.personalConfiguration.ItemEditor;
 			LightHack.button.Visible = ConfigurationLoader.personalConfiguration.LightHack && !heros;
 			GodMode.button.Visible = ConfigurationLoader.personalConfiguration.GodMode && !heros;
 			SpawnRateMultiplier.button.Visible = ConfigurationLoader.personalConfiguration.SpawnRate && SpawnRateMultiplier.HasPermission && Main.netMode != NetmodeID.MultiplayerClient;
@@ -863,6 +884,9 @@ namespace CCSheet.Menus
 			if (mod.npcButchererHotbar.selected && !mod.npcButchererHotbar.hidden) {
 				mod.npcButchererHotbar.Hide();
 			}
+			if (mod.itemEditorHotbar.selected && !mod.itemEditorHotbar.hidden) {
+				mod.itemEditorHotbar.Hide();
+			}
 			if (ConfigurationTool.configurationWindow.selected && !ConfigurationTool.configurationWindow.hidden) {
 				ConfigurationTool.configurationWindow.Hide();
 			}
@@ -905,6 +929,9 @@ namespace CCSheet.Menus
 			}
 			if (mod.npcButchererHotbar.selected) {
 				mod.npcButchererHotbar.Show();
+			}
+			if (mod.itemEditorHotbar.selected) {
+				mod.itemEditorHotbar.Show();
 			}
 			if (ConfigurationTool.configurationWindow.selected) {
 				ConfigurationTool.configurationWindow.Show();

@@ -1,6 +1,6 @@
 displayName = Client Cheat Sheet (by RobbyV2)
 author = jopojelly, CCSheet by RobbyV2
-version = 1.0.1
-homepage = https://github.com/jopojelly/CheatSheet
+version = 1.0.2
+homepage = https://github.com/RobbyV2/CCSheet
 side = Client
 buildIgnore = *.csproj, *.sln, *.user, .vs\*, bin\*, obj\*, .git\*, .github\*, references\*, docs\*, .claude\*, CLAUDE.md, temp\*, .gitignore, .gitmodules

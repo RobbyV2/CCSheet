@@ -1,4 +1,6 @@
-﻿Cheat Sheet is a tool for developers and those who just want to play around with any vanilla or mod item, recipe, or NPC. There are also tools to "paint" tiles to make building easier and faster.
+﻿Client Cheat Sheet (CCSheet) is a client-sided soft-fork of Cheat Sheet. It runs on vanilla tModLoader servers (no server-side component required) and preserves the original mod's feature set while adding a few client-local tools and quality-of-life fixes. See the 1.0.2 additions near the bottom.
+
+Cheat Sheet is a tool for developers and those who just want to play around with any vanilla or mod item, recipe, or NPC. There are also tools to "paint" tiles to make building easier and faster.
 Press K (or whatever hotkey you've assigned to "Toggle Cheat Sheet Hotbar") or click the button at the bottom center of your screen to view the Cheat Sheet Hotbar to access all the items. Press/Click again to hide it along with the selected item.
 
 With the config, you can set tools to only be available to the host in multiplayer if you wish.
@@ -60,3 +62,9 @@ Mod Extension Cheats:
 Any cheats added by other mods will appear here. See the mod thread for info on how to add your own cheat buttons.
 
 More tools will be added over time. Your input is highly appreciated, which you can leave by the Cheat Sheet forum post.
+
+CCSheet additions (1.0.2):
+- Item Editor: a floating window opened from the Actuation Rod button. Drop an item into the slot to edit its stats (type, stack, prefix, damage, crit, knockback, use time, use animation, shoot, shoot speed, mana, scale, ammo, use ammo, auto reuse, rare). Click Apply to commit. Taking the item out clears the fields.
+- Extra Accessory Slots now go up to 20 (was 6). After the first column fills, additional slots wrap into a second column to the left of the vanilla 3-column right-side UI.
+- Waypoint teleports in multiplayer surface a one-time notice about tile streaming. Dungeon, hell, and temple now warn in chat when their target tiles are not synced, instead of silently landing you off-map.
+- Spawn Rate Multiplier is hidden on multiplayer clients since it has no client-side effect.

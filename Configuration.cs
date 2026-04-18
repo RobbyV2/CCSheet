@@ -97,6 +97,7 @@ namespace CCSheet
 		public bool Vacuum = true;
 		public bool LightHack = true;
 		public bool GodMode = true;
+		public bool ItemEditor = true;
 
 		//public bool BossDowner = true;
 		//public bool EventManager = true;

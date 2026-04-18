@@ -41,6 +41,7 @@ namespace CCSheet
 
 		public void DrawUpdateAll(SpriteBatch spriteBatch) {
 			CCSheet.instance.itemBrowser.Draw(spriteBatch);
+			CCSheet.instance.itemEditorHotbar.Draw(spriteBatch);
 			CCSheet.instance.npcBrowser.Draw(spriteBatch);
 			CCSheet.instance.recipeBrowser.Draw(spriteBatch);
 			CCSheet.instance.extendedCheatMenu.Draw(spriteBatch);
@@ -52,6 +53,7 @@ namespace CCSheet
 
 			CCSheet.instance.npcBrowser.Update();
 			CCSheet.instance.itemBrowser.Update();
+			CCSheet.instance.itemEditorHotbar.Update();
 			CCSheet.instance.recipeBrowser.Update();
 			CCSheet.instance.extendedCheatMenu.Update();
 
@@ -113,8 +115,8 @@ namespace CCSheet
 					int num18 = /*Main.mH +*/mH + 174;
 					if (Main.netMode == 1)
 						num17 -= 47;
-					r.X = num17/* + l * -47*/;
-					r.Y = num18 + (0 + i) * 47;
+					r.X = num17 - (i / 10) * 47;
+					r.Y = num18 + (i % 10) * 47;
 
 					if (r.Contains(value)/* && !flag2*/) {
 						Main.LocalPlayer.mouseInterface = true;

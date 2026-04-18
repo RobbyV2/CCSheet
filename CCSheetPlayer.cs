@@ -8,7 +8,7 @@ namespace CCSheet
 {
 	internal class CCSheetPlayer : ModPlayer
 	{
-		public static int MaxExtraAccessories = 6;
+		public static int MaxExtraAccessories = 20;
 		public Item[] ExtraAccessories = new Item[MaxExtraAccessories];
 		public int numberExtraAccessoriesEnabled = 0;
 

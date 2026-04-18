@@ -11,6 +11,7 @@ Mods: {
 			VacuumItems: Vacuum Items
 			ShowNPCButcherer: Show NPC Butcherer
 			ShowQuickWaypoints: Show Quick Waypoints
+			ShowItemEditor: Show Item Editor
 			ConfigureAvailableTools: Configure Available Tools
 		}
 
@@ -19,6 +20,28 @@ Mods: {
 			ButcherHostileAndFriendlyNPCs: Butcher hostile and friendly NPCs
 			ButcherFriendlyNPCs: Butcher friendly NPCs
 			ButcherNotification: NPCs were butchered by {0}
+		}
+
+		ItemEditor: {
+			ShowItemEditor: Show Item Editor
+			Type: Type
+			Stack: Stack
+			Prefix: Prefix
+			Damage: Damage
+			KnockBack: Knockback
+			Crit: Crit
+			UseTime: Use Time
+			UseAnimation: Use Anim
+			Shoot: Shoot
+			ShootSpeed: Shoot Speed
+			Mana: Mana
+			Scale: Scale
+			Ammo: Ammo
+			UseAmmo: Use Ammo
+			AutoReuse: Auto Reuse
+			Rare: Rare
+			Apply: Apply
+			InvalidType: Invalid item type
 		}
 
 		Vacuum.VacuumNotification: Items on the ground were vacuumed by {0}
@@ -90,6 +113,7 @@ Mods: {
 			Waypoints: Waypoints
 			LightHack: Light Hack
 			GodMode: God Mode
+			ItemEditor: Item Editor
 		}
 
 		ExtendedCheatMenu.NoExtensionCheatModsInstalled:
