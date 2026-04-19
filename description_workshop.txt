@@ -16,6 +16,7 @@ Click an item to grab a full stack of that item or Shift-click to move a full st
 
 NPC Browser:
 Click any NPC to spawn it in front of your character. Use categories and search filter to find the NPC you desire.
+Multiplayer nuance: bosses spawn through the vanilla SpawnBossUseLicense packet (the same packet the Suspicious Looking Eye uses), so they replicate normally to other players. Regular enemies are spawned client-side only and do not replicate to peers, because vanilla servers do not grant clients authority to spawn arbitrary enemies. Bosses work in MP, regular enemies appear for you only.
 
 Recipe Browser:
 Click on any Recipe to see details. Use categories and search filter to find the recipe you want.
@@ -43,6 +44,7 @@ Right click to permanently vacuum items to you (until you stop playing or disabl
 Quick Waypoints:
 Left click to browse quick waypoints, this currently includes teleport to: spawn, hell, lihzahrd altar, dungeon and a random place.
 Please note: temple teleport only works if there's a Lihzahrd Altar.
+Multiplayer nuance: the first teleport in a session shows a one-time notice about tile streaming; vanilla netcode streams tile data after the teleport, so you may briefly flash through unloaded terrain. Dungeon requires Main.dungeonX/Y which vanilla servers do not broadcast to clients, so that button warns instead of landing you at (0,0). Hell and temple require their target tiles to be streamed to the client already, typically by having visited the area once.
 
 NPC Butcher Menu:
 You can butcher (kill) hostile NPCs as well as Town NPCs using the Butcher menu.
@@ -53,12 +55,6 @@ Cycle through settings for manipulating a spawn rate multiplier. (Spawn limit al
 
 LightHack:
 See through the darkness.
-
-Next Update: Event Manager:
-Start or stop all events.
-
-Next Update: Boss Downer:
-Allows you to set various bosses as defeated in the world.
 
 Mod Extension Cheats:
 Any cheats added by other mods will appear here. See the mod thread for info on how to add your own cheat buttons.
