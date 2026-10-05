@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using Terraria;
 using Terraria.GameContent;
@@ -42,22 +41,6 @@ namespace CCSheet
 			}
 
 			//    CCSheet.instance.hotbar.ChangedBossDowner();
-		}
-
-		public override void NetSend(BinaryWriter writer) {
-			writer.Write7BitEncodedInt((int)NPCBrowser.filteredNPCSlots.Count);
-			foreach (var item in NPCBrowser.filteredNPCSlots) {
-				writer.Write7BitEncodedInt((int)item);
-			}
-		}
-
-		public override void NetReceive(BinaryReader reader) {
-			NPCBrowser.filteredNPCSlots.Clear();
-			int numFiltered = reader.Read7BitEncodedInt();
-			for (int i = 0; i < numFiltered; i++) {
-				NPCBrowser.filteredNPCSlots.Add(reader.Read7BitEncodedInt());
-			}
-			NPCBrowser.needsUpdate = true;
 		}
 
 		public override void UpdateUI(GameTime gameTime) {
